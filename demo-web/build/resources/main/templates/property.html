@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>物件一覧ポータル</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1> 検索結果 (<span th:text="${properties.size()}">4</span>件)</h1>
+        <a th:href="@{/property(favorites=true)}" class="favorites-link">★ お気に入り一覧</a>
+        <form th:action="@{/property}" method="get" class="search-form">
+            <input type="text" name="keyword" placeholder="物件名や地域で検索" th:value="${keyword}">
+            <button type="submit">検索</button>
+        </form>
+        <details class="sort-dropdown">
+            <summary>並び替え ▼</summary>
+            <div class="sort-menu">
+                <button type="button" onclick="sortCards('asc', event)">安い順</button>
+                <button type="button" onclick="sortCards('desc', event)">高い順</button>
+            </div>
+        </details>
+
+        <div class="card-list" id="cardList">
+            <a th:each="p : ${properties}"
+               th:href="@{/property/{id}(id=${p.id})}"
+               th:attr="data-price=${p.price}, data-id=${p.id}"
+               class="card-link">
+                <div class="card">
+                    <button type="button" class="favorite-btn" onclick="toggleFavorite(event, this)">☆</button>
+                    <span class="badge" th:text="${p.layout}">1K</span>
+                    <h2 th:text="${p.name}">物件名</h2>
+                    <p class="price" th:text="${p.price}">家賃</p>
+                    <div class="detail-item">
+                        <span th:text="${p.location}">住所</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</header>
+
+<footer>
+    <p>&copy; 2024 Your Company Name. All Rights Reserved.</p>
+</footer>
+
+<script>
+    function parsePrice(priceStr) {
+        if (!priceStr) return 0;
+        return parseInt(priceStr.replace(/[^0-9]/g, ''), 10) || 0;
+    }
+
+    function sortCards(order, event) {
+        if (event) event.preventDefault();
+        const container = document.getElementById('cardList');
+        const cards = Array.from(container.children);
+
+        const firstPositions = new Map();
+        cards.forEach(card => firstPositions.set(card, card.getBoundingClientRect().top));
+
+        cards.sort((a, b) => {
+            const priceA = parsePrice(a.getAttribute('data-price'));
+            const priceB = parsePrice(b.getAttribute('data-price'));
+            return order === 'asc' ? priceA - priceB : priceB - priceA;
+        });
+
+        cards.forEach(card => container.appendChild(card));
+
+        cards.forEach(card => {
+            const newTop = card.getBoundingClientRect().top;
+            const oldTop = firstPositions.get(card);
+            const delta = oldTop - newTop;
+
+            card.style.transition = 'none';
+            card.style.transform = `translateY(${delta}px)`;
+        });
+
+        requestAnimationFrame(() => {
+            cards.forEach(card => {
+                card.style.transition = 'transform 0.4s ease';
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        const dropdown = document.querySelector('.sort-dropdown');
+        if (dropdown) dropdown.removeAttribute('open');
+    }
+
+    function getFavorites() {
+        const saved = localStorage.getItem('favoriteProperties');
+        return saved ? JSON.parse(saved) : [];
+    }
+
+    function saveFavorites(favorites) {
+        localStorage.setItem('favoriteProperties', JSON.stringify(favorites));
+    }
+
+    function toggleFavorite(event, btn) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const card = btn.closest('.card-link');
+        const id = card.getAttribute('data-id');
+        let favorites = getFavorites();
+
+        if (favorites.includes(id)) {
+            favorites = favorites.filter(favId => favId !== id);
+            btn.textContent = '☆';
+            btn.classList.remove('active');
+        } else {
+            favorites.push(id);
+            btn.textContent = '★';
+            btn.classList.add('active');
+        }
+
+        saveFavorites(favorites);
+    }
+
+    function applyFavoriteState() {
+        const favorites = getFavorites();
+        document.querySelectorAll('.card-link').forEach(card => {
+            const id = card.getAttribute('data-id');
+            const btn = card.querySelector('.favorite-btn');
+            if (favorites.includes(id)) {
+                btn.textContent = '★';
+                btn.classList.add('active');
+            }
+        });
+    }
+
+    function applyFavoritesFilter() {
+        const parms = new URLSearchParams(window.location.search);
+        if (parms.get('favorites') !== 'true') return;
+
+        const favorites = getFavorites();
+        const cards = document.querySelectorAll('.card-link');
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+            const id = card.getAttribute('data-id');
+            if (favorites.includes(id)) {
+                card.style.display = '';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        const countEl = document.getElementById('resultCount');
+        if (countEl) countEl.textContent = visibleCount;
+
+        const h1 = document.querySelector('h1');
+        if (h1) {
+            h1.innerHTML = `★ お気に入り一覧 (<span id="resultCount">${visibleCount}</span>件)`;
+        }
+        if (visibleCount === 0) {
+            const cardList = document.getElementById('cardList');
+            const emptyMsg = document.createElement('p');
+            emptyMsg.textContent = 'お気に入りに登録された物件はまだありません。';
+            emptyMsg.className = 'empty-message';
+            cardList.appendChild(emptyMsg);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        applyFavoriteState();
+        applyFavoritesFilter();
+    });
+</script>
+</body>
+</html>
