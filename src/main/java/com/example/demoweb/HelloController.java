@@ -13,6 +13,12 @@ import java.util.stream.Collectors;
 
 @Controller
 public class HelloController {
+
+    @GetMapping("/")
+    public String home() {
+        return "redirect:/property";
+    }
+
     @GetMapping("/property")
     public String showProperty(
             @RequestParam(value = "sort", required = false) String sort,
