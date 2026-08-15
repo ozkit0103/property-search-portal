@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${property != null ? property.name : '物件が見つかりません'}">物件詳細</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<script>
+    function getFavorites() {
+        const saved = localStorage.getItem('favoriteProperties');
+        return saved ? JSON.parse(saved) : [];
+    }
+
+    function saveFavorites(favorites) {
+        localStorage.setItem('favoriteProperties', JSON.stringify(favorites));
+    }
+
+    function toggleFavorite(event, btn) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const id = btn.getAttribute('data-id');
+        let favorites = getFavorites();
+
+        if (favorites.includes(id)) {
+            favorites = favorites.filter(favId => favId !== id);
+            btn.textContent = '☆';
+            btn.classList.remove('active');
+        } else {
+            favorites.push(id);
+            btn.textContent = '★';
+            btn.classList.add('active');
+        }
+
+        saveFavorites(favorites);
+    }
+
+    function applyFavoriteState() {
+        const btn = document.querySelector('.favorite-btn');
+        if (!btn) return;
+        const id = btn.getAttribute('data-id');
+        const favorites = getFavorites();
+        if (favorites.includes(id)) {
+            btn.textContent = '★';
+            btn.classList.add('active');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', applyFavoriteState);
+</script>
+<header>
+    <div class="container">
+        <a th:href="@{/property}" class="back-link">← 一覧に戻る</a>
+
+        <div class="card" th:if="${property != null}">
+            <button type="button" class="favorite-btn" th:attr="data-id=${property.id}" onclick="toggleFavorite(event, this)">☆</button>
+            <span class="badge" th:text="${property.layout}">1K</span>
+            <h1 th:text="${property.name}">物件名</h1>
+            <p class="price" th:text="${property.price}">家賃</p>
+            <div class="detail-item">
+                <span th:text="${property.location}">住所</span>
+            </div>
+        </div>
+
+        <p th:if="${property == null}" class="empty-message">物件が見つかりませんでした。</p>
+    </div>
+</header>
+
+<footer>
+    <p>&copy; 2024 Your Company Name. All Rights Reserved.</p>
+</footer>
+</body>
+</html>
