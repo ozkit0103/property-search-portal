@@ -48,6 +48,41 @@
         }
     }
 
+    function openContactModal() {
+        document.getElementById('contactModal').classList.add('active');
+        document.getElementById('contactFormView').style.display = 'block';
+        document.getElementById('contactSuccessView').style.display = 'none';
+        document.getElementById('contactError').textContent = '';
+    }
+
+    function closeContactModal() {
+        document.getElementById('contactModal').classList.remove('active');
+        document.getElementById('contactName').value = '';
+        document.getElementById('contactEmail').value = '';
+        document.getElementById('contactMessage').value = '';
+    }
+
+    function submitContactForm() {
+        const name = document.getElementById('contactName').value.trim();
+        const email = document.getElementById('contactEmail').value.trim();
+        const message = document.getElementById('contactMessage').value.trim();
+        const errorEl = document.getElementById('contactError');
+
+        if (!name || !email || !message) {
+            errorEl.textContent = 'すべての項目を入力してください。';
+            return;
+        }
+
+        if (!email.includes('@')) {
+            errorEl.textContent = 'メールアドレスの形式が正しくありません。';
+            return;
+        }
+
+        errorEl.textContent = '';
+        document.getElementById('contactFormView').style.display = 'none';
+        document.getElementById('contactSuccessView').style.display = 'block';
+    }
+
     document.addEventListener('DOMContentLoaded', applyFavoriteState);
 </script>
 
@@ -58,7 +93,7 @@
         <div th:if="${property != null}">
 
             <div class="gallery">
-                <div class="gallery-main">🏢</div>
+                <div class="gallery-main">🏠</div>
                 <div class="gallery-thumbs">
                     <div class="gallery-thumb">🛋️</div>
                     <div class="gallery-thumb">🚪</div>
