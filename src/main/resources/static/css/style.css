@@ -228,6 +228,122 @@ footer {
     padding: 40px 0;
 }
 
+.detail-container {
+    max-width: 700px;
+}
+
+.gallery {
+    margin: 16px 0;
+}
+
+.gallery-main {
+    background: linear-gradient(135deg, #486581, #829ab1);
+    height: 260px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 72px;
+}
+
+.gallery-thumbs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.gallery-thumb {
+    background: linear-gradient(135deg, #bcccdc, #d9e2ec);
+    height: 70px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+}
+
+.detail-header {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 24px;
+    margin: 16px 0;
+    position: relative;
+}
+
+.detail-header h1 {
+    margin: 12px 0 8px;
+    font-size: 24px;
+}
+
+.detail-header .price {
+    color: #d9381e;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.detail-header .price small {
+    font-size: 14px;
+    color: #829ab1;
+    font-weight: normal;
+    margin-left: 4px;
+}
+
+.detail-section {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 24px;
+    margin: 16px 0;
+}
+
+.section-title {
+    font-size: 16px;
+    color: #102a43;
+    border-left: 4px solid #486581;
+    padding-left: 10px;
+    margin: 0 0 16px;
+}
+
+.feature-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.feature-list li {
+    background: #f0f4f8;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+    color: #334e68;
+}
+
+.contact-section {
+    text-align: center;
+}
+
+.contact-note {
+    color: #627d98;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+@media (max-width: 600px) {
+    .gallery-main {
+        height: 180px;
+        font-size: 48px;
+    }
+
+    .feature-list {
+        grid-template-columns: 1fr;
+    }
+}
+
 @media (max-width: 600px) {
     body {
         padding: 12px;

@@ -7,6 +7,83 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
+<header>
+    <div class="container detail-container">
+        <a th:href="@{/property}" class="back-link">← 一覧に戻る</a>
+
+        <div th:if="${property != null}">
+
+            <div class="gallery">
+                <div class="gallery-main">🏢</div>
+                <div class="gallery-thumbs">
+                    <div class="gallery-thumb">🛋️</div>
+                    <div class="gallery-thumb">🚪</div>
+                    <div class="gallery-thumb">🚿</div>
+                    <div class="gallery-thumb">🗺️</div>
+                </div>
+            </div>
+
+            <div class="detail-header">
+                <button type="button" class="favorite-btn" th:attr="data-id=${property.id}" onclick="toggleFavorite(event, this)">☆</button>
+                <span class="badge" th:text="${property.layout}">1K</span>
+                <h1 th:text="${property.name}">物件名</h1>
+                <p class="price"><span th:text="${property.price}">家賃</span><small>/月</small></p>
+            </div>
+
+            <section class="detail-section">
+                <h3 class="section-title">物件概要</h3>
+                <table class="detail-table">
+                    <tr>
+                        <th>所在地</th>
+                        <td th:text="${property.location}">住所</td>
+                    </tr>
+                    <tr>
+                        <th>最寄り駅</th>
+                        <td th:text="${property.nearestStation}">駅名</td>
+                    </tr>
+                    <tr>
+                        <th>駅からの距離</th>
+                        <td th:text="${property.access}">徒歩○分</td>
+                    </tr>
+                    <tr>
+                        <th>築年数</th>
+                        <td th:text="${property.age}">築○年</td>
+                    </tr>
+                    <tr>
+                        <th>間取り</th>
+                        <td th:text="${property.layout}">1K</td>
+                    </tr>
+                </table>
+            </section>
+
+            <section class="detail-section">
+                <h3 class="section-title">設備・特徴</h3>
+                <ul class="feature-list">
+                    <li>オートロック</li>
+                    <li>宅配ボックス</li>
+                    <li>エアコン</li>
+                    <li>駐輪場</li>
+                    <li>インターネット無料</li>
+                    <li>ペット相談可</li>
+                </ul>
+            </section>
+
+            <section class="detail-section contact-section">
+                <h3 class="section-title">この物件について問い合わせる</h3>
+                <p class="contact-note">内見のご相談やご質問など、お気軽にお問い合わせください。</p>
+                <button type="button" class="contact-btn">問い合わせフォームを開く</button>
+            </section>
+
+        </div>
+
+        <p th:if="${property == null}" class="empty-message">物件が見つかりませんでした。</p>
+    </div>
+</header>
+
+<footer>
+    <p>&copy; 2024 Your Company Name. All Rights Reserved.</p>
+</footer>
+
 <script>
     function getFavorites() {
         const saved = localStorage.getItem('favoriteProperties');
@@ -50,26 +127,5 @@
 
     document.addEventListener('DOMContentLoaded', applyFavoriteState);
 </script>
-<header>
-    <div class="container">
-        <a th:href="@{/property}" class="back-link">← 一覧に戻る</a>
-
-        <div class="card" th:if="${property != null}">
-            <button type="button" class="favorite-btn" th:attr="data-id=${property.id}" onclick="toggleFavorite(event, this)">☆</button>
-            <span class="badge" th:text="${property.layout}">1K</span>
-            <h1 th:text="${property.name}">物件名</h1>
-            <p class="price" th:text="${property.price}">家賃</p>
-            <div class="detail-item">
-                <span th:text="${property.location}">住所</span>
-            </div>
-        </div>
-
-        <p th:if="${property == null}" class="empty-message">物件が見つかりませんでした。</p>
-    </div>
-</header>
-
-<footer>
-    <p>&copy; 2024 Your Company Name. All Rights Reserved.</p>
-</footer>
 </body>
 </html>
