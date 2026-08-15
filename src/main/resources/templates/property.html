@@ -7,45 +7,6 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<header>
-    <div class="container">
-        <h1> 検索結果 (<span id="resultCount" th:text="${properties.size()}">4</span>件)</h1>
-        <a th:href="@{/property(favorites=true)}" class="favorites-link">★ お気に入り一覧</a>
-        <form th:action="@{/property}" method="get" class="search-form">
-            <input type="text" name="keyword" placeholder="物件名や地域で検索" th:value="${keyword}">
-            <button type="submit">検索</button>
-        </form>
-        <details class="sort-dropdown">
-            <summary>並び替え ▼</summary>
-            <div class="sort-menu">
-                <button type="button" onclick="sortCards('asc', event)">安い順</button>
-                <button type="button" onclick="sortCards('desc', event)">高い順</button>
-            </div>
-        </details>
-
-        <div class="card-list" id="cardList">
-            <a th:each="p : ${properties}"
-               th:href="@{/property/{id}(id=${p.id})}"
-               th:attr="data-price=${p.price}, data-id=${p.id}"
-               class="card-link">
-                <div class="card">
-                    <button type="button" class="favorite-btn" onclick="toggleFavorite(event, this)">☆</button>
-                    <span class="badge" th:text="${p.layout}">1K</span>
-                    <h2 th:text="${p.name}">物件名</h2>
-                    <p class="price" th:text="${p.price}">家賃</p>
-                    <div class="detail-item">
-                        📍 所在地: <span th:text="${p.location}">住所</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
-</header>
-
-<footer>
-    <p>&copy; 2024 Your Company Name. All Rights Reserved.</p>
-</footer>
-
 <script>
     function parsePrice(priceStr) {
         if (!priceStr) return 0;
@@ -130,6 +91,41 @@
         });
     }
 
+    function openContactModal() {
+        document.getElementById('contactModal').classList.add('active');
+        document.getElementById('contactFormView').style.display = 'block';
+        document.getElementById('contactSuccessView').style.display = 'none';
+        document.getElementById('contactError').textContent = '';
+    }
+
+    function closeContactModal() {
+        document.getElementById('contactModal').classList.remove('active');
+        document.getElementById('contactName').value = '';
+        document.getElementById('contactEmail').value = '';
+        document.getElementById('contactMessage').value = '';
+    }
+
+    function submitContactForm() {
+        const name = document.getElementById('contactName').value.trim();
+        const email = document.getElementById('contactEmail').value.trim();
+        const message = document.getElementById('contactMessage').value.trim();
+        const errorEl = document.getElementById('contactError');
+
+        if (!name || !email || !message) {
+            errorEl.textContent = 'すべての項目を入力してください。';
+            return;
+        }
+
+        if (!email.includes('@')) {
+            errorEl.textContent = 'メールアドレスの形式が正しくありません。';
+            return;
+        }
+
+        errorEl.textContent = '';
+        document.getElementById('contactFormView').style.display = 'none';
+        document.getElementById('contactSuccessView').style.display = 'block';
+    }
+
     function applyFavoritesFilter() {
         const params = new URLSearchParams(window.location.search);
         if (params.get('favorites') !== 'true') return;
@@ -169,5 +165,45 @@
         applyFavoritesFilter();
     });
 </script>
+
+<header>
+    <div class="container">
+        <h1> 検索結果 (<span id="resultCount" th:text="${properties.size()}">4</span>件)</h1>
+        <a th:href="@{/property(favorites=true)}" class="favorites-link">★ お気に入り一覧</a>
+        <form th:action="@{/property}" method="get" class="search-form">
+            <input type="text" name="keyword" placeholder="物件名や地域で検索" th:value="${keyword}">
+            <button type="submit">検索</button>
+        </form>
+        <details class="sort-dropdown">
+            <summary>並び替え ▼</summary>
+            <div class="sort-menu">
+                <button type="button" onclick="sortCards('asc', event)">安い順</button>
+                <button type="button" onclick="sortCards('desc', event)">高い順</button>
+            </div>
+        </details>
+
+        <div class="card-list" id="cardList">
+            <a th:each="p : ${properties}"
+               th:href="@{/property/{id}(id=${p.id})}"
+               th:attr="data-price=${p.price}, data-id=${p.id}"
+               class="card-link">
+                <div class="card">
+                    <button type="button" class="favorite-btn" onclick="toggleFavorite(event, this)">☆</button>
+                    <span class="badge" th:text="${p.layout}">1K</span>
+                    <h2 th:text="${p.name}">物件名</h2>
+                    <p class="price" th:text="${p.price}">家賃</p>
+                    <div class="detail-item">
+                        <span th:text="${p.location}">住所</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</header>
+
+<footer>
+    <p>&copy; 2024 Your Company Name. All Rights Reserved.</p>
+</footer>
+
 </body>
 </html>

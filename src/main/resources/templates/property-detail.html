@@ -7,6 +7,50 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
+<script>
+    function getFavorites() {
+        const saved = localStorage.getItem('favoriteProperties');
+        return saved ? JSON.parse(saved) : [];
+    }
+
+    function saveFavorites(favorites) {
+        localStorage.setItem('favoriteProperties', JSON.stringify(favorites));
+    }
+
+    function toggleFavorite(event, btn) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const id = btn.getAttribute('data-id');
+        let favorites = getFavorites();
+
+        if (favorites.includes(id)) {
+            favorites = favorites.filter(favId => favId !== id);
+            btn.textContent = '☆';
+            btn.classList.remove('active');
+        } else {
+            favorites.push(id);
+            btn.textContent = '★';
+            btn.classList.add('active');
+        }
+
+        saveFavorites(favorites);
+    }
+
+    function applyFavoriteState() {
+        const btn = document.querySelector('.favorite-btn');
+        if (!btn) return;
+        const id = btn.getAttribute('data-id');
+        const favorites = getFavorites();
+        if (favorites.includes(id)) {
+            btn.textContent = '★';
+            btn.classList.add('active');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', applyFavoriteState);
+</script>
+
 <header>
     <div class="container detail-container">
         <a th:href="@{/property}" class="back-link">← 一覧に戻る</a>
@@ -71,7 +115,7 @@
             <section class="detail-section contact-section">
                 <h3 class="section-title">この物件について問い合わせる</h3>
                 <p class="contact-note">内見のご相談やご質問など、お気軽にお問い合わせください。</p>
-                <button type="button" class="contact-btn">問い合わせフォームを開く</button>
+                <button type="button" class="contact-btn" onclick="openContactModal()">問い合わせフォームを開く</button>
             </section>
 
         </div>
@@ -84,48 +128,41 @@
     <p>&copy; 2024 Your Company Name. All Rights Reserved.</p>
 </footer>
 
-<script>
-    function getFavorites() {
-        const saved = localStorage.getItem('favoriteProperties');
-        return saved ? JSON.parse(saved) : [];
-    }
+<div class="modal-overlay" id="contactModal">
+    <div class="modal-box">
+        <button type="button" class="modal-close" onclick="closeContactModal()">✕</button>
 
-    function saveFavorites(favorites) {
-        localStorage.setItem('favoriteProperties', JSON.stringify(favorites));
-    }
+        <div id="contactFormView">
+            <h3>問い合わせフォーム</h3>
+            <p class="modal-property-name" th:if="${property != null}" th:text="${property.name}">物件名</p>
 
-    function toggleFavorite(event, btn) {
-        event.preventDefault();
-        event.stopPropagation();
+            <label class="form-label">
+                お名前
+                <input type="text" id="contactName" placeholder="山田 太郎">
+            </label>
 
-        const id = btn.getAttribute('data-id');
-        let favorites = getFavorites();
+            <label class="form-label">
+                メールアドレス
+                <input type="email" id="contactEmail" placeholder="example@mail.com">
+            </label>
 
-        if (favorites.includes(id)) {
-            favorites = favorites.filter(favId => favId !== id);
-            btn.textContent = '☆';
-            btn.classList.remove('active');
-        } else {
-            favorites.push(id);
-            btn.textContent = '★';
-            btn.classList.add('active');
-        }
+            <label class="form-label">
+                お問い合わせ内容
+                <textarea id="contactMessage" rows="4" placeholder="内見希望日など、ご自由にご記入ください"></textarea>
+            </label>
 
-        saveFavorites(favorites);
-    }
+            <p class="form-error" id="contactError"></p>
 
-    function applyFavoriteState() {
-        const btn = document.querySelector('.favorite-btn');
-        if (!btn) return;
-        const id = btn.getAttribute('data-id');
-        const favorites = getFavorites();
-        if (favorites.includes(id)) {
-            btn.textContent = '★';
-            btn.classList.add('active');
-        }
-    }
+            <button type="button" class="contact-btn" onclick="submitContactForm()">送信する</button>
+        </div>
 
-    document.addEventListener('DOMContentLoaded', applyFavoriteState);
-</script>
+        <div id="contactSuccessView" class="contact-success" style="display:none;">
+            <p class="success-icon">✅</p>
+            <h3>送信されました</h3>
+            <p>お問い合わせありがとうございます。担当者より折り返しご連絡いたします。</p>
+            <button type="button" class="contact-btn" onclick="closeContactModal()">閉じる</button>
+        </div>
+    </div>
+</div>
 </body>
 </html>

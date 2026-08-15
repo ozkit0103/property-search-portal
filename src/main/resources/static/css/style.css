@@ -333,6 +333,92 @@ footer {
     margin-bottom: 16px;
 }
 
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(16, 42, 67, 0.5);
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-box {
+    background: white;
+    border-radius: 12px;
+    padding: 28px;
+    width: 90%;
+    max-width: 420px;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #829ab1;
+}
+
+.modal-box h3 {
+    margin-top: 0;
+    color: #102a43;
+}
+
+.modal-property-name {
+    color: #486581;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.form-label {
+    display: block;
+    font-size: 13px;
+    color: #486581;
+    margin-bottom: 14px;
+}
+
+.form-label input,
+.form-label textarea {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 6px;
+    padding: 10px;
+    border: 1px solid #d9e2ec;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.form-error {
+    color: #d9381e;
+    font-size: 13px;
+    min-height: 18px;
+    margin-bottom: 8px;
+}
+
+.contact-success {
+    text-align: center;
+}
+
+.success-icon {
+    font-size: 40px;
+    margin: 0;
+}
+
 @media (max-width: 600px) {
     .gallery-main {
         height: 180px;
