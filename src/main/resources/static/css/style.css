@@ -419,6 +419,48 @@ footer {
     margin: 0;
 }
 
+.card-image {
+    margin: -25px -25px 16px;
+    height: 160px;
+    overflow: hidden;
+    border-radius: 12px 12px 0 0;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-main {
+    background: #d9e2ec;
+    height: 260px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.gallery-main img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-thumb {
+    background: #d9e2ec;
+    height: 70px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.gallery-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
 @media (max-width: 600px) {
     .gallery-main {
         height: 180px;

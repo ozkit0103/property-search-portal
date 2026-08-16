@@ -189,6 +189,9 @@
                class="card-link">
                 <div class="card">
                     <button type="button" class="favorite-btn" onclick="toggleFavorite(event, this)">☆</button>
+                    <div class="card-image">
+                        <img th:src="@{'https://picsum.photos/seed/' + ${p.id} + '/400/240'}" alt="物件画像">
+                    </div>
                     <span class="badge" th:text="${p.layout}">1K</span>
                     <h2 th:text="${p.name}">物件名</h2>
                     <p class="price" th:text="${p.price}">家賃</p>
