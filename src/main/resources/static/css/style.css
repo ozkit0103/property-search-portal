@@ -434,10 +434,13 @@ footer {
 }
 
 .gallery-main {
-    background: #d9e2ec;
+    background: linear-gradient(135deg, #486581, #829ab1);
     height: 260px;
     border-radius: 12px;
-    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 72px;
 }
 
 .gallery-main img {
@@ -448,10 +451,13 @@ footer {
 }
 
 .gallery-thumb {
-    background: #d9e2ec;
+    background: linear-gradient(135deg, #bcccdc, #d9e2ec);
     height: 70px;
     border-radius: 8px;
-    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
 }
 
 .gallery-thumb img {
