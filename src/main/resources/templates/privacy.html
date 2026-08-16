@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プライバシーポリシー | 物件情報検索ポータル</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header>
+    <div class="container detail-container">
+        <a th:href="@{/property}" class="back-link">← 一覧に戻る</a>
+
+        <section class="detail-section">
+            <h1 class="page-title">プライバシーポリシー</h1>
+            <p class="policy-lead">株式会社レジデンス東京(以下、「当社」といいます。)は、本サービスにおけるご利用者様の個人情報の取り扱いについて、以下のとおりプライバシーポリシー(以下、「本ポリシー」といいます。)を定めます。</p>
+
+            <h3 class="section-title">1. 取得する情報</h3>
+            <p class="policy-text">当社は、お問い合わせフォームを通じて、お名前、メールアドレス、お問い合わせ内容等の情報を取得することがあります。</p>
+
+            <h3 class="section-title">2. 利用目的</h3>
+            <p class="policy-text">取得した個人情報は、以下の目的の範囲内で利用いたします。</p>
+            <ul class="policy-list">
+                <li>お問い合わせへの対応・ご案内のため</li>
+                <li>物件のご紹介・内見のご連絡のため</li>
+                <li>本サービスの改善・品質向上のため</li>
+            </ul>
+
+            <h3 class="section-title">3. 第三者提供</h3>
+            <p class="policy-text">当社は、法令に基づく場合を除き、あらかじめご本人の同意を得ることなく、第三者に個人情報を提供することはありません。</p>
+
+            <h3 class="section-title">4. 個人情報の管理</h3>
+            <p class="policy-text">当社は、取得した個人情報を適切に管理し、不正アクセス・紛失・漏えい等の防止に努めます。</p>
+
+            <h3 class="section-title">5. 開示・訂正・削除等のご請求</h3>
+            <p class="policy-text">ご本人より、個人情報の開示・訂正・削除等のご請求があった場合には、ご本人であることを確認のうえ、合理的な期間内に対応いたします。</p>
+
+            <h3 class="section-title">6. お問い合わせ窓口</h3>
+            <p class="policy-text">本ポリシーに関するお問い合わせは、各物件詳細ページのお問い合わせフォームよりご連絡ください。</p>
+
+            <p class="policy-date">制定日:2024年4月1日</p>
+        </section>
+    </div>
+</header>
+
+<footer>
+    <p>&copy; 2024 株式会社レジデンス東京. All Rights Reserved.</p>
+    <p class="footer-links">
+        <a th:href="@{/about}">会社概要</a> |
+        <a th:href="@{/terms}">利用規約</a> |
+        <a th:href="@{/privacy}">プライバシーポリシー</a>
+    <p class="portfolio-credit">
+        本サイトはポートフォリオとして制作されたデモサイトです(Spring Boot学習用)。
+    <a href="https://github.com/ozkit0103" target="_blank" rel="noopener">制作者: ozawa_dev (GitHub)</a>
+    </p>
+    </p>
+</footer>
+</body>
+</html>

@@ -569,6 +569,76 @@ footer {
     margin-top: 6px;
 }
 
+.page-title {
+    font-size: 22px;
+    color: #102a43;
+    margin-top: 0;
+}
+
+.about-message {
+    line-height: 1.9;
+    color: #334e68;
+    font-size: 14px;
+}
+
+.policy-lead {
+    color: #486581;
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 24px;
+}
+
+.policy-text {
+    color: #334e68;
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 8px 0 16px;
+}
+
+.policy-list {
+    color: #334e68;
+    font-size: 14px;
+    line-height: 1.9;
+    padding-left: 20px;
+    margin-bottom: 16px;
+}
+
+.policy-date {
+    color: #829ab1;
+    font-size: 12px;
+    text-align: right;
+    margin-top: 24px;
+}
+
+.footer-links {
+    margin-top: 8px;
+    font-size: 12px;
+}
+
+.footer-links a {
+    color: #bcccdc;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.portfolio-credit {
+    margin-top: 10px;
+    font-size: 11px;
+    color: #627d98;
+}
+
+.portfolio-credit a {
+    color: #9fb3c8;
+    text-decoration: underline;
+}
+
+.portfolio-credit a:hover {
+    color: #ffffff;
+}
+
 @media (max-width: 600px) {
     .filter-form {
         flex-direction: column;

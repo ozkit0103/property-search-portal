@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>会社概要 | 物件情報検索ポータル</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header>
+    <div class="container detail-container">
+        <a th:href="@{/property}" class="back-link">← 一覧に戻る</a>
+
+        <section class="detail-section">
+            <h1 class="page-title">会社概要</h1>
+
+            <table class="detail-table">
+                <tr>
+                    <th>会社名</th>
+                    <td>株式会社レジデンス東京</td>
+                </tr>
+                <tr>
+                    <th>設立</th>
+                    <td>2018年4月1日</td>
+                </tr>
+                <tr>
+                    <th>所在地</th>
+                    <td>東京都港区六本木一丁目1番1号 レジデンス東京ビル5階</td>
+                </tr>
+                <tr>
+                    <th>代表者</th>
+                    <td>代表取締役 山田 太郎</td>
+                </tr>
+                <tr>
+                    <th>事業内容</th>
+                    <td>不動産の売買・賃貸の仲介および管理、不動産情報サイトの運営</td>
+                </tr>
+                <tr>
+                    <th>宅地建物取引業免許</th>
+                    <td>東京都知事(1)第00000号</td>
+                </tr>
+                <tr>
+                    <th>加盟団体</th>
+                    <td>公益社団法人 全国宅地建物取引業協会連合会</td>
+                </tr>
+            </table>
+        </section>
+
+        <section class="detail-section">
+            <h3 class="section-title">代表挨拶</h3>
+            <p class="about-message">
+                私たちは「お客様一人ひとりの暮らしに寄り添う」ことを何よりも大切にしています。
+                物件情報の提供だけでなく、内見からご契約後のアフターフォローまで、専任スタッフが責任を持ってご案内いたします。
+                これからも、皆様にとって信頼できるパートナーであり続けられるよう努めてまいります。
+            </p>
+        </section>
+    </div>
+</header>
+
+<footer>
+    <p>&copy; 2024 株式会社レジデンス東京. All Rights Reserved.</p>
+    <p class="footer-links">
+        <a th:href="@{/about}">会社概要</a> |
+        <a th:href="@{/terms}">利用規約</a> |
+        <a th:href="@{/privacy}">プライバシーポリシー</a>
+    </p>
+    <p class="portfolio-credit">
+        本サイトはポートフォリオとして制作されたデモサイトです(Spring Boot学習用)。
+        <a href="https://github.com/ozkit0103" target="_blank" rel="noopener">制作者: ozawa_dev (GitHub)</a>
+    </p>
+</footer>
+</body>
+</html>

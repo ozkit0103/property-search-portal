@@ -110,6 +110,21 @@ public class HelloController {
         return "property-detail";
     }
 
+    @GetMapping("/about")
+    public String about() {
+        return "about";
+    }
+
+    @GetMapping("/terms")
+    public String terms() {
+        return "terms";
+    }
+
+    @GetMapping("/privacy")
+    public String privacy() {
+        return "privacy";
+    }
+
     private int parsePrice(String priceText) {
         String numberOnly = priceText.replace(",", "").replace("円", "");
         return Integer.parseInt(numberOnly);

@@ -165,6 +165,15 @@
 <footer>
     <p>&copy; 2024 株式会社レジデンス東京. All Rights Reserved.</p>
     <p class="footer-note">お部屋探しに関するご相談は、各物件ページよりお気軽にお問い合わせください。</p>
+    <p class="footer-links">
+        <a th:href="@{/about}">会社概要</a> |
+        <a th:href="@{/terms}">利用規約</a> |
+        <a th:href="@{/privacy}">プライバシーポリシー</a>
+    <p class="portfolio-credit">
+        本サイトはポートフォリオとして制作されたデモサイトです(Spring Boot学習用)。
+    <a href="https://github.com/ozkit0103" target="_blank" rel="noopener">制作者: ozawa_dev (GitHub)</a>
+    </p>
+    </p>
 </footer>
 
 <div class="modal-overlay" id="contactModal">
@@ -196,7 +205,7 @@
         </div>
 
         <div id="contactSuccessView" class="contact-success" style="display:none;">
-            <p class="success-icon">✅</p>
+            <p class="success-icon">⭕</p>
             <h3>お問い合わせを受け付けました</h3>
             <p>この度はお問い合わせいただき、誠にありがとうございます。担当スタッフより、2営業日以内を目安にご連絡させていただきます。</p>
             <button type="button" class="contact-btn" onclick="closeContactModal()">閉じる</button>
