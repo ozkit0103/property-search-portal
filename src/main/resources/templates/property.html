@@ -116,6 +116,10 @@
         if (h1) {
             h1.innerHTML = `★ お気に入り一覧 (<span id="resultCount">${visibleCount}</span>件)`;
         }
+
+        const favLink = document.querySelector('.favorites-link');
+        if (favLink) favLink.style.display = 'none';
+
         if (visibleCount === 0) {
             const cardList = document.getElementById('cardList');
             const emptyMsg = document.createElement('p');
