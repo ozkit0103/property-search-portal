@@ -69,13 +69,13 @@
 
         if (favorites.includes(id)) {
             favorites = favorites.filter(favId => favId !== id);
-            btn.textContent = '☆';
             btn.classList.remove('active');
         } else {
             favorites.push(id);
-            btn.textContent = '★';
             btn.classList.add('active');
         }
+        btn.innerHTML = '<i data-lucide="star"></i>';
+        lucide.createIcons();
 
         saveFavorites(favorites);
     }
@@ -86,45 +86,9 @@
             const id = card.getAttribute('data-id');
             const btn = card.querySelector('.favorite-btn');
             if (favorites.includes(id)) {
-                btn.textContent = '★';
                 btn.classList.add('active');
             }
         });
-    }
-
-    function openContactModal() {
-        document.getElementById('contactModal').classList.add('active');
-        document.getElementById('contactFormView').style.display = 'block';
-        document.getElementById('contactSuccessView').style.display = 'none';
-        document.getElementById('contactError').textContent = '';
-    }
-
-    function closeContactModal() {
-        document.getElementById('contactModal').classList.remove('active');
-        document.getElementById('contactName').value = '';
-        document.getElementById('contactEmail').value = '';
-        document.getElementById('contactMessage').value = '';
-    }
-
-    function submitContactForm() {
-        const name = document.getElementById('contactName').value.trim();
-        const email = document.getElementById('contactEmail').value.trim();
-        const message = document.getElementById('contactMessage').value.trim();
-        const errorEl = document.getElementById('contactError');
-
-        if (!name || !email || !message) {
-            errorEl.textContent = 'すべての項目を入力してください。';
-            return;
-        }
-
-        if (!email.includes('@')) {
-            errorEl.textContent = 'メールアドレスの形式が正しくありません。';
-            return;
-        }
-
-        errorEl.textContent = '';
-        document.getElementById('contactFormView').style.display = 'none';
-        document.getElementById('contactSuccessView').style.display = 'block';
     }
 
     function applyFavoritesFilter() {
@@ -194,7 +158,9 @@
                     <span class="badge" th:text="${p.layout}">1K</span>
                     <h2 th:text="${p.name}">物件名</h2>
                     <p class="price" th:text="${p.price}">家賃</p>
-                    <i data-lucide="map-pin" class="inline-icon"></i> 所在地: <span th:text="${p.location}">住所</span>
+                    <div class="detail-item">
+                        <i data-lucide="map-pin" class="inline-icon"></i> 所在地: <span th:text="${p.location}">住所</span>
+                    </div>
                 </div>
             </a>
         </div>

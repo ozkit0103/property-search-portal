@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${property != null ? property.name : '物件が見つかりません'}">物件詳細</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 </head>
 <body>
 <script>
@@ -26,13 +27,13 @@
 
         if (favorites.includes(id)) {
             favorites = favorites.filter(favId => favId !== id);
-            btn.textContent = '☆';
             btn.classList.remove('active');
         } else {
             favorites.push(id);
-            btn.textContent = '★';
             btn.classList.add('active');
         }
+        btn.innerHTML = '<i data-lucide="star"></i>';
+        lucide.createIcons();
 
         saveFavorites(favorites);
     }
@@ -43,7 +44,6 @@
         const id = btn.getAttribute('data-id');
         const favorites = getFavorites();
         if (favorites.includes(id)) {
-            btn.textContent = '★';
             btn.classList.add('active');
         }
     }
@@ -83,7 +83,10 @@
         document.getElementById('contactSuccessView').style.display = 'block';
     }
 
-    document.addEventListener('DOMContentLoaded', applyFavoriteState);
+    document.addEventListener('DOMContentLoaded', () => {
+        applyFavoriteState();
+        lucide.createIcons();
+    });
 </script>
 
 <header>
@@ -93,19 +96,17 @@
         <div th:if="${property != null}">
 
             <div class="gallery">
-                <div class="gallery-main">
-                    <img th:src="@{'https://picsum.photos/seed/' + ${property.id} + '/700/400'}" alt="メイン">
-                </div>
+                <div class="gallery-main"><i data-lucide="home"></i></div>
                 <div class="gallery-thumbs">
-                    <div class="gallery-thumb"><img th:src="@{'https://picsum.photos/seed/' + ${property.id} + 'a/200/140'}" alt="サブ1"></div>
-                    <div class="gallery-thumb"><img th:src="@{'https://picsum.photos/seed/' + ${property.id} + 'b/200/140'}" alt="サブ2"></div>
-                    <div class="gallery-thumb"><img th:src="@{'https://picsum.photos/seed/' + ${property.id} + 'c/200/140'}" alt="サブ3"></div>
-                    <div class="gallery-thumb"><img th:src="@{'https://picsum.photos/seed/' + ${property.id} + 'd/200/140'}" alt="サブ4"></div>
+                    <div class="gallery-thumb"><i data-lucide="sofa"></i></div>
+                    <div class="gallery-thumb"><i data-lucide="door-open"></i></div>
+                    <div class="gallery-thumb"><i data-lucide="shower-head"></i></div>
+                    <div class="gallery-thumb"><i data-lucide="map"></i></div>
                 </div>
             </div>
 
             <div class="detail-header">
-                <button type="button" class="favorite-btn" th:attr="data-id=${property.id}" onclick="toggleFavorite(event, this)">☆</button>
+                <button type="button" class="favorite-btn" th:attr="data-id=${property.id}" onclick="toggleFavorite(event, this)"><i data-lucide="star"></i></button>
                 <span class="badge" th:text="${property.layout}">1K</span>
                 <h1 th:text="${property.name}">物件名</h1>
                 <p class="price"><span th:text="${property.price}">家賃</span><small>/月</small></p>
@@ -140,12 +141,12 @@
             <section class="detail-section">
                 <h3 class="section-title">設備・特徴</h3>
                 <ul class="feature-list">
-                    <li>オートロック</li>
-                    <li>宅配ボックス</li>
-                    <li>エアコン</li>
-                    <li>駐輪場</li>
-                    <li>インターネット無料</li>
-                    <li>ペット相談可</li>
+                    <li><i data-lucide="lock" class="inline-icon"></i> オートロック</li>
+                    <li><i data-lucide="package" class="inline-icon"></i> 宅配ボックス</li>
+                    <li><i data-lucide="snowflake" class="inline-icon"></i> エアコン</li>
+                    <li><i data-lucide="bike" class="inline-icon"></i> 駐輪場</li>
+                    <li><i data-lucide="wifi" class="inline-icon"></i> インターネット無料</li>
+                    <li><i data-lucide="paw-print" class="inline-icon"></i> ペット相談可</li>
                 </ul>
             </section>
 
@@ -162,7 +163,7 @@
 </header>
 
 <footer>
-    <p>&copy; 2024 Your Company Name. All Rights Reserved.</p>
+    <p>&copy; 2024 株式会社レジデンス東京. All Rights Reserved.</p>
 </footer>
 
 <div class="modal-overlay" id="contactModal">
