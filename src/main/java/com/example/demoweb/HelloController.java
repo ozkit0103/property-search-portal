@@ -23,6 +23,9 @@ public class HelloController {
     public String showProperty(
             @RequestParam(value = "sort", required = false) String sort,
             @RequestParam(value = "keyword", required = false) String keyword,
+            @RequestParam(value = "area", required = false) String area,
+            @RequestParam(value = "layout", required = false) String layout,
+            @RequestParam(value = "maxPrice", required = false) Integer maxPrice,
             Model model) {
 
         List<Property> propertyList = createPropertyList();
@@ -30,6 +33,24 @@ public class HelloController {
         if (keyword != null && !keyword.isBlank()) {
             propertyList = propertyList.stream()
                     .filter(p -> p.getName().contains(keyword) || p.getLocation().contains(keyword))
+                    .collect(Collectors.toList());
+        }
+
+        if (area != null && !area.isBlank()) {
+            propertyList = propertyList.stream()
+                    .filter(p -> p.getLocation().contains(area))
+                    .collect(Collectors.toList());
+        }
+
+        if (layout != null && !layout.isBlank()) {
+            propertyList = propertyList.stream()
+                    .filter(p -> p.getLayout().equals(layout))
+                    .collect(Collectors.toList());
+        }
+
+        if (maxPrice != null) {
+            propertyList = propertyList.stream()
+                    .filter(p -> parsePrice(p.getPrice()) <= maxPrice)
                     .collect(Collectors.toList());
         }
 
@@ -43,7 +64,10 @@ public class HelloController {
 
         model.addAttribute("properties", propertyList);
         model.addAttribute("currentSort", sort);
-        model.addAttribute("currentKeyword", keyword);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("currentArea", area);
+        model.addAttribute("currentLayout", layout);
+        model.addAttribute("currentMaxPrice", maxPrice);
 
         return "property";
     }

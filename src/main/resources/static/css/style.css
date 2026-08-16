@@ -511,6 +511,55 @@ footer {
     color: #486581;
 }
 
+.filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0;
+    align-items: center;
+}
+
+.filter-form select {
+    padding: 8px 10px;
+    border: 1px solid #d9e2ec;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #334e68;
+    background: white;
+}
+
+.filter-form button {
+    padding: 8px 16px;
+    background: #486581;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.filter-form button:hover {
+    background: #334e68;
+}
+
+.filter-reset {
+    font-size: 13px;
+    color: #829ab1;
+    text-decoration: none;
+    margin-left: 4px;
+}
+
+.filter-reset:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    .filter-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
 @media (max-width: 600px) {
     .gallery-main {
         height: 180px;

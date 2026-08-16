@@ -140,6 +140,48 @@
             <input type="text" name="keyword" placeholder="物件名や地域で検索" th:value="${keyword}">
             <button type="submit">検索</button>
         </form>
+
+        <form th:action="@{/property}" method="get" class="filter-form">
+            <input type="hidden" name="keyword" th:value="${keyword}">
+
+            <select name="area">
+                <option value="">エリアを選択</option>
+                <option value="港区" th:selected="${currentArea == '港区'}">港区</option>
+                <option value="渋谷区" th:selected="${currentArea == '渋谷区'}">渋谷区</option>
+                <option value="新宿区" th:selected="${currentArea == '新宿区'}">新宿区</option>
+                <option value="世田谷区" th:selected="${currentArea == '世田谷区'}">世田谷区</option>
+                <option value="中野区" th:selected="${currentArea == '中野区'}">中野区</option>
+                <option value="目黒区" th:selected="${currentArea == '目黒区'}">目黒区</option>
+                <option value="杉並区" th:selected="${currentArea == '杉並区'}">杉並区</option>
+                <option value="台東区" th:selected="${currentArea == '台東区'}">台東区</option>
+                <option value="足立区" th:selected="${currentArea == '足立区'}">足立区</option>
+                <option value="武蔵野市" th:selected="${currentArea == '武蔵野市'}">武蔵野市</option>
+                <option value="川崎市" th:selected="${currentArea == '川崎市'}">川崎市(武蔵小杉)</option>
+            </select>
+
+            <select name="layout">
+                <option value="">間取りを選択</option>
+                <option value="1K" th:selected="${currentLayout == '1K'}">1K</option>
+                <option value="1DK" th:selected="${currentLayout == '1DK'}">1DK</option>
+                <option value="1LDK" th:selected="${currentLayout == '1LDK'}">1LDK</option>
+                <option value="2DK" th:selected="${currentLayout == '2DK'}">2DK</option>
+                <option value="2LDK" th:selected="${currentLayout == '2LDK'}">2LDK</option>
+                <option value="3LDK" th:selected="${currentLayout == '3LDK'}">3LDK</option>
+            </select>
+
+            <select name="maxPrice">
+                <option value="">家賃上限</option>
+                <option value="80000" th:selected="${currentMaxPrice == 80000}">8万円以下</option>
+                <option value="100000" th:selected="${currentMaxPrice == 100000}">10万円以下</option>
+                <option value="150000" th:selected="${currentMaxPrice == 150000}">15万円以下</option>
+                <option value="200000" th:selected="${currentMaxPrice == 200000}">20万円以下</option>
+                <option value="300000" th:selected="${currentMaxPrice == 300000}">30万円以下</option>
+            </select>
+
+            <button type="submit">絞り込む</button>
+            <a th:href="@{/property}" class="filter-reset">条件をリセット</a>
+        </form>
+
         <details class="sort-dropdown">
             <summary>並び替え ▼</summary>
             <div class="sort-menu">
