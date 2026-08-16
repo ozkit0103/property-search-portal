@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${property != null ? property.name : '物件が見つかりません'}">物件詳細</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 </head>
 <body>
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js">
+<script>
     function getFavorites() {
         const saved = localStorage.getItem('favoriteProperties');
         return saved ? JSON.parse(saved) : [];

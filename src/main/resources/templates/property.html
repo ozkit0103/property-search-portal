@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>物件一覧ポータル</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 </head>
 <body>
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js">
+<script>
     function parsePrice(priceStr) {
         if (!priceStr) return 0;
         return parseInt(priceStr.replace(/[^0-9]/g, ''), 10) || 0;
