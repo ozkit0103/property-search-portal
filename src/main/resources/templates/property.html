@@ -7,7 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js">
     function parsePrice(priceStr) {
         if (!priceStr) return 0;
         return parseInt(priceStr.replace(/[^0-9]/g, ''), 10) || 0;
@@ -163,6 +163,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         applyFavoriteState();
         applyFavoritesFilter();
+        lucide.createIcons();
     });
 </script>
 
@@ -188,13 +189,11 @@
                th:attr="data-price=${p.price}, data-id=${p.id}"
                class="card-link">
                 <div class="card">
-                    <button type="button" class="favorite-btn" onclick="toggleFavorite(event, this)">☆</button>
+                    <button type="button" class="favorite-btn" onclick="toggleFavorite(event, this)"><i data-lucide="star"></i></button>
                     <span class="badge" th:text="${p.layout}">1K</span>
                     <h2 th:text="${p.name}">物件名</h2>
                     <p class="price" th:text="${p.price}">家賃</p>
-                    <div class="detail-item">
-                        <span th:text="${p.location}">住所</span>
-                    </div>
+                    <i data-lucide="map-pin" class="inline-icon"></i> 所在地: <span th:text="${p.location}">住所</span>
                 </div>
             </a>
         </div>
@@ -202,7 +201,7 @@
 </header>
 
 <footer>
-    <p>&copy; 2024 Your Company Name. All Rights Reserved.</p>
+    <p>&copy; 2024 株式会社レジデンス東京. All Rights Reserved.</p>
 </footer>
 
 </body>

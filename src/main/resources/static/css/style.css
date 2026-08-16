@@ -467,6 +467,50 @@ footer {
     display: block;
 }
 
+[data-lucide] {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2;
+}
+
+.inline-icon {
+    width: 16px;
+    height: 16px;
+    vertical-align: -3px;
+    margin-right: 2px;
+}
+
+.favorite-btn [data-lucide] {
+    color: #bcccdc;
+    fill: none;
+}
+
+.favorite-btn.active [data-lucide] {
+    color: #f0b429;
+    fill: #f0b429;
+}
+
+.gallery-main [data-lucide] {
+    width: 64px;
+    height: 64px;
+    color: white;
+}
+
+.gallery-thumb [data-lucide] {
+    width: 28px;
+    height: 28px;
+    color: #486581;
+}
+
+.feature-list li {
+    display: flex;
+    align-items: center;
+}
+
+.feature-list [data-lucide] {
+    color: #486581;
+}
+
 @media (max-width: 600px) {
     .gallery-main {
         height: 180px;

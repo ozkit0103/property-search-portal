@@ -7,7 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js">
     function getFavorites() {
         const saved = localStorage.getItem('favoriteProperties');
         return saved ? JSON.parse(saved) : [];
@@ -26,13 +26,14 @@
 
         if (favorites.includes(id)) {
             favorites = favorites.filter(favId => favId !== id);
-            btn.textContent = '☆';
+            btn.innerHTML = '<i data-lucide="star"></i>';
             btn.classList.remove('active');
         } else {
             favorites.push(id);
-            btn.textContent = '★';
+            btn.innerHTML = '<i data-lucide="star"></i>';
             btn.classList.add('active');
         }
+        lucide.createIcons();
 
         saveFavorites(favorites);
     }
@@ -83,7 +84,10 @@
         document.getElementById('contactSuccessView').style.display = 'block';
     }
 
-    document.addEventListener('DOMContentLoaded', applyFavoriteState);
+    document.addEventListener('DOMContentLoaded', () => {
+        applyFavoriteState();
+        lucide.createIcons();
+    });
 </script>
 
 <header>
@@ -93,17 +97,17 @@
         <div th:if="${property != null}">
 
             <div class="gallery">
-                <div class="gallery-main">🏠</div>
+                <div class="gallery-main"><i data-lucide="home"></i></div>
                 <div class="gallery-thumbs">
-                    <div class="gallery-thumb">🛋️</div>
-                    <div class="gallery-thumb">🚪</div>
-                    <div class="gallery-thumb">🚿</div>
-                    <div class="gallery-thumb">🗺️</div>
+                    <div class="gallery-thumb"><i data-lucide="sofa"></i></div>
+                    <div class="gallery-thumb"><i data-lucide="door-open"></i></div>
+                    <div class="gallery-thumb"><i data-lucide="shower-head"></i></div>
+                    <div class="gallery-thumb"><i data-lucide="map"></i></div>
                 </div>
             </div>
 
             <div class="detail-header">
-                <button type="button" class="favorite-btn" th:attr="data-id=${property.id}" onclick="toggleFavorite(event, this)">☆</button>
+                <button type="button" class="favorite-btn" th:attr="data-id=${property.id}" onclick="toggleFavorite(event, this)"><i data-lucide="star"></i></button>
                 <span class="badge" th:text="${property.layout}">1K</span>
                 <h1 th:text="${property.name}">物件名</h1>
                 <p class="price"><span th:text="${property.price}">家賃</span><small>/月</small></p>
@@ -138,12 +142,12 @@
             <section class="detail-section">
                 <h3 class="section-title">設備・特徴</h3>
                 <ul class="feature-list">
-                    <li>オートロック</li>
-                    <li>宅配ボックス</li>
-                    <li>エアコン</li>
-                    <li>駐輪場</li>
-                    <li>インターネット無料</li>
-                    <li>ペット相談可</li>
+                    <li><i data-lucide="lock" class="inline-icon"></i> オートロック</li>
+                    <li><i data-lucide="package" class="inline-icon"></i> 宅配ボックス</li>
+                    <li><i data-lucide="snowflake" class="inline-icon"></i> エアコン</li>
+                    <li><i data-lucide="bike" class="inline-icon"></i> 駐輪場</li>
+                    <li><i data-lucide="wifi" class="inline-icon"></i> インターネット無料</li>
+                    <li><i data-lucide="paw-print" class="inline-icon"></i> ペット相談可</li>
                 </ul>
             </section>
 
@@ -160,7 +164,7 @@
 </header>
 
 <footer>
-    <p>&copy; 2024 Your Company Name. All Rights Reserved.</p>
+    <p>&copy; 2024 株式会社レジデンス東京. All Rights Reserved.</p>
 </footer>
 
 <div class="modal-overlay" id="contactModal">
