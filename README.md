@@ -1,5 +1,6 @@
 # 物件検索ポータル (Property Search Portal)
 
+
 Spring Boot + Thymeleaf で構築した、賃貸物件検索ポータルアプリです。
 検索・絞り込み・お気に入り機能に加え、会社概要や利用規約といった周辺ページまで含めて、
 実在の不動産ポータルサイトに近い構成を意識して実装しています。
@@ -42,6 +43,7 @@ Spring Boot + Thymeleaf で構築した、賃貸物件検索ポータルアプ�
 ### 物件一覧・検索フィルタ
 エリア・間取り・家賃上限で絞り込める検索フィルタと、キーワード検索を備えた一覧画面です。
 ![一覧画面](screenshots/list.png)
+![キーワード検索](screenshots/keyword.png)
 ![フィルタ絞り込み](screenshots/filter.png)
 
 ### 並び替え
@@ -54,6 +56,7 @@ Spring Boot + Thymeleaf で構築した、賃貸物件検索ポータルアプ�
 
 ### お問い合わせフォーム
 物件詳細ページからモーダルで開くお問い合わせフォームです。入力チェックと送信完了画面を実装しています。
+![お問い合わせセクション](screenshots/contact.png)
 ![お問い合わせフォーム](screenshots/contactform.png)
 
 ### お気に入り一覧
