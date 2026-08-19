@@ -134,6 +134,15 @@
         applyFavoritesFilter();
         lucide.createIcons();
     });
+
+    window.addEventListener('pageshow', (event) => {
+        if (event.persisted) {
+            applyFavoriteState();
+            applyFavoritesFilter();
+            lucide.createIcons();
+        }
+    });
+
 </script>
 
 <header>
